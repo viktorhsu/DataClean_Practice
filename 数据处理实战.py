@@ -31,16 +31,31 @@ re.search(r"programming", text)：在整个字符串text中匹配“programming�
 df["岗位名"].value_counts()：计算该列中各不同数值，以及出现的相应次数
 
 count1 = text.str.count("Python", 10, 40)：#用于计算特定子字符串在原始字符串中出现的次数。该行为计算在字符串text中，索引10和40之间，"Python" 出现的次数.对于DataFrame或者Series对象，需要使用str属性。对一个标准的Python字符串对象，直接使用count()即可。
+#target_job = ['算法', '开发', '分析', '工程师', '数据', '运营', '运维']
+#job_han = [job_info1["岗位名"].str.count(i) for i in target_job]
+#job_han = np.array(job_han).sum(axis=0)>0
+#job_info1 = job_info1[job_han]
+#print(job_info1.shape)
 
 .shape：查看dataframe的形状
 
+contains_result = df['text'].str.contains('an', case=True, na=False)：表示判断text列中，数据是否包含"an"，case表示是否区分大小写。na=False表示如果数据值为空值，则为不包含。
+
 str.split(",", 3)：根据指定的符号","来拆分字符串，且最大的拆分次数为3.如不指定拆分的符号和次数，则默认为以空格为拆分符号，并且不限次数。对于DataFrame或者Series对象，需要使用str属性。对一个标准的Python字符串对象，直接使用split()即可。
+
+zip(gs.index.tolist(), gs.values.tolist())：将两个列表一一配对，连接在一起，变成一个个连接好的元祖。zip()函数产生的是一个迭代器对象，需通过for循环将元素输出。
+
+job_info.loc[job_info["行业"].apply(lambda x:len(x)<6),"行业"] = np.nan：通过loc[]以及布尔值数组，筛选出满足条件的行。
+
+job_info["行业"] = job_info["行业"].str[2:-2].str.split("/").str[0]：根据特定的符号对数据进行分割，并只取分割后的第一个元素
 
 
 
 
 7、常见操作
 将列表转换成数组：数值的计算效率会更快；数组要求数据类型保持一致，利于数据分析；数组支持广播功能，可以在不同形状的数组间进行运算；数组可提供的数据处理更多。不过数组的内存开销会更大
+
+
 
 
 
